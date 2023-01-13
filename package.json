@@ -1,0 +1,24 @@
+{
+  "name": "optimum-nutra-fit",
+  "version": "1.0.0",
+  "description": "Optimum NutraFit webapp created for the BeaverHacks OSU Hackathon Winter 2023.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zacmaes/optimum-nutra-fit.git"
+  },
+  "author": "zacmaes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zacmaes/optimum-nutra-fit/issues"
+  },
+  "homepage": "https://github.com/zacmaes/optimum-nutra-fit#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.3"
+  }
+}
