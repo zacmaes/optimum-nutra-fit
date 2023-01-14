@@ -1,0 +1,16 @@
+{
+  "name": "optimum_rest",
+  "version": "1.0.0",
+  "description": "REST API for Optimum NutriFit webapp, created for Beaverhacks winter 2023",
+  "main": "optimum_controller.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zacmaes",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.8.3"
+  }
+}
