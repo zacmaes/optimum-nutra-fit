@@ -52,10 +52,6 @@ app.get('/signupform', (req, res) => {
     res.render('user_creation_index.ejs')
 })
 
-app.get('/signup_send', (req, res) => {
-    res.send('/home-page/index.html')
-})
-
 // --------------Mongo routes-------------------------------
 /**
  * Create a new exercise with the name, reps, weight, unit, and date provided in the body
