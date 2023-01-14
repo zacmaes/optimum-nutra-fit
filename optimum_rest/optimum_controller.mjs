@@ -15,29 +15,29 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // add a body validation function here
-// const isBodyValid = (name, weight, height, login_username, login_password) => {
-//     if (name === undefined || weight === undefined || height === undefined || login_username === undefined || login_password === undefined){
-//         // console.log("missing property")
-//         return false;
-//     } else if (name === null || name.trim() === "") {
-//         // console.log("empty or null string name")
-//         return false;
-//     } else if (typeof reps !== "number" || reps <= 0) {
-//         // console.log("reps NaN or less than 0")
-//         return false;
-//     } else if (typeof weight !== "number" || weight <= 0) {
-//         // console.log("weight NaN or less than 0")
-//         return false;
-//     } else if (unit !== "kgs" && unit !== "lbs") {
-//         // console.log("unit not kgs or lbs")
-//         return false;
-//     } else if (!isDateValid(date)) {
-//         // console.log("invalid date")
-//         return false;
-//     }
-//     // console.log("EVERYTHING WORKS...")
-//     return true;
-// }
+const isBodyValid = (name, weight, height, login_username, login_password) => {
+    if (name === undefined || weight === undefined || height === undefined || login_username === undefined || login_password === undefined){
+        // console.log("missing property")
+        return false;
+    } else if (name === null || name.trim() === "") {
+        // console.log("empty or null string name")
+        return false;
+    } else if (typeof weight !== "number" || weight <= 0) {
+        // console.log("reps NaN or less than 0")
+        return false;
+    } else if (typeof height !== "number" || height <= 0) {
+        // console.log("weight NaN or less than 0")
+        return false;
+    } else if (login_username === null || login_username.trim() === "") {
+        // console.log("unit not kgs or lbs")
+        return false;
+    } else if (login_password === null || login_password.trim() === "") {
+        // console.log("invalid date")
+        return false;
+    }
+    // console.log("EVERYTHING WORKS...")
+    return true;
+}
 
 
 // add a date validation function here
@@ -61,9 +61,9 @@ app.get('/signup_send', (req, res) => {
  * Create a new exercise with the name, reps, weight, unit, and date provided in the body
  */
 app.post('/users', asyncHandler(async (req, res) => {
-    if (isBodyValid(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)){
+    if (isBodyValid(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password)){
         try {
-            const user = await users.createUser(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date);
+            const user = await users.createUser(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password);
             res.set('Content-Type', 'application/json');
             res.status(201).json(user);
             
