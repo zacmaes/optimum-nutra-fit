@@ -4,7 +4,8 @@ import express from 'express';
 import asyncHandler from 'express-async-handler';
 
 
-const PORT = process.env.PORT;
+//const PORT = process.env.PORT;
+const PORT = 3000
 
 const app = express();
 
