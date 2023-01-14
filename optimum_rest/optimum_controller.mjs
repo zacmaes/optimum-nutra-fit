@@ -9,18 +9,32 @@ const PORT = 3000
 
 const app = express();
 
-app.use(express.json());
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 
 // add a body validation function here
 
 // add a date validation function here
 
-// hello world test
+// home page
 app.get('/', (req, res) => {
-    res.send('Hello World!')
-  })
+    res.render('landing_page_index.ejs')
+})
 
+app.get('/signupform', (req, res) => {
+    try{
+        res.render('user_creation_index.ejs')
+    }
+    catch{
+        error => console.error(error)
+    }
+})
 
+app.get('/signup_send', (req, res) => {
+    res.send('/home-page/index.html')
+})
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
