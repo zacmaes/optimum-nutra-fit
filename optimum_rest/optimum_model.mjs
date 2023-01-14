@@ -15,7 +15,7 @@ db.once("open", () => {
 });
 
 /**
- * Define user schema, This may not be the best schema yet... gonna focus on exercise first
+ * Define user schema, This may not be the best schema yet...
  */
 const userSchema = mongoose.Schema({
     name: { type: String, required: true },
@@ -68,4 +68,55 @@ const userSchema = mongoose.Schema({
  */
 const User = mongoose.model("User", userSchema);
 
+// ====================================================================================
 
+//--------------- USER SPECIFIC FUNCTIONS ---------------------------------------------
+
+/**
+ * Create a new user
+ * @param {String} name 
+ * @param {Number} weight 
+ * @param {Number} height 
+ * @param {String} login_username 
+ * @param {String} login_password 
+ * @returns A promise. Resolves to the JSON object for the document created by calling save().
+ */
+const createUser = async (name, weight, height, login_username, login_password) => {
+    const user = new User({ name: name, weight: weight, height: height, login_username: login_username, login_password: login_password});
+    return user.save();
+}
+
+/**
+ * Find users that match the query parameter filter
+ * @param {Object} filter 
+ * @returns A promise. Resolves to and array of the JSON objects returned by calling .find() and .exec()
+ */
+const findUsers = async (filter) => {
+    const query = User.find(filter);
+    return query.exec();
+}
+
+/**
+ * Updates one user by their _id. Will update multiple key=value pairs if entered.
+ * @param {Object} filter 
+ * @param {Object} update 
+ * @returns A promise. Resolves to a number (either 1 or 0) representing the modified count
+ */
+const updateUsers = async (filter, update) => {
+    const result = await User.updateOne(filter, update);
+    // return result.modifiedCount;
+    return result;
+    // consider change to matchedCount
+}
+
+/**
+ * Deletes one or more users based upon the condition object passed as a parameter
+ * @param {Object} paramToDelete 
+ * @returns A promise. Resolves to a number showing the amount of users deleted
+ */
+const deleteUsers = async (paramToDelete) => {
+    const result = await User.deleteMany(paramToDelete);
+    return result.deletedCount;
+}
+
+export {createUser, findUsers, updateUsers, deleteUsers};
