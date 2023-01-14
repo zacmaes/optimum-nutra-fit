@@ -49,12 +49,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/signupform', (req, res) => {
-    try{
-        res.render('user_creation_index.ejs')
-    }
-    catch{
-        error => console.error(error)
-    }
+    res.render('')
 })
 
 app.get('/signup_send', (req, res) => {
