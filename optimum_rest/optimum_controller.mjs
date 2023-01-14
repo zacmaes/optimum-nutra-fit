@@ -15,9 +15,34 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 // add a body validation function here
+// const isBodyValid = (name, weight, height, login_username, login_password) => {
+//     if (name === undefined || weight === undefined || height === undefined || login_username === undefined || login_password === undefined){
+//         // console.log("missing property")
+//         return false;
+//     } else if (name === null || name.trim() === "") {
+//         // console.log("empty or null string name")
+//         return false;
+//     } else if (typeof reps !== "number" || reps <= 0) {
+//         // console.log("reps NaN or less than 0")
+//         return false;
+//     } else if (typeof weight !== "number" || weight <= 0) {
+//         // console.log("weight NaN or less than 0")
+//         return false;
+//     } else if (unit !== "kgs" && unit !== "lbs") {
+//         // console.log("unit not kgs or lbs")
+//         return false;
+//     } else if (!isDateValid(date)) {
+//         // console.log("invalid date")
+//         return false;
+//     }
+//     // console.log("EVERYTHING WORKS...")
+//     return true;
+// }
+
 
 // add a date validation function here
 
+// -----------EJS VIEW Routes-------------------
 // home page
 app.get('/', (req, res) => {
     res.render('landing_page_index.ejs')
@@ -35,6 +60,34 @@ app.get('/signupform', (req, res) => {
 app.get('/signup_send', (req, res) => {
     res.send('/home-page/index.html')
 })
+
+// --------------Mongo routes-------------------------------
+/**
+ * Create a new exercise with the name, reps, weight, unit, and date provided in the body
+ */
+app.post('/users', asyncHandler(async (req, res) => {
+    if (isBodyValid(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)){
+        try {
+            const user = await users.createUser(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date);
+            res.set('Content-Type', 'application/json');
+            res.status(201).json(user);
+            
+        } catch (error) {
+            // request error (from A7)
+            console.error(error);
+            res.status(400).json({ Error: 'Request Failed' });
+        }
+    } else {
+        // Body invalid if isBodyValid() returns False
+        res.set('Content-Type', 'application/json');
+        res.status(400).json({ Error: 'Invalid request' });
+    }
+    
+        
+    
+    // res.status(501).send({ Error: "Not implemented yet || app.post('/exercises'" });
+}));
+
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
