@@ -86,6 +86,18 @@ const createUser = async (name, weight, height, login_username, login_password) 
     return user.save();
 }
 
+//Verify username exists
+const verifyUser = async (login_username) => {
+    User.exists({name: login_username}, function (err, doc) {
+        if (err){
+            return 'Error: ', err
+        }else{
+            
+            return 'Result: ',doc
+        }
+    });
+}
+
 /**
  * Find users that match the query parameter filter
  * @param {Object} filter 
@@ -119,4 +131,4 @@ const deleteUsers = async (paramToDelete) => {
     return result.deletedCount;
 }
 
-export {createUser, findUsers, updateUsers, deleteUsers};
+export {createUser, findUsers, updateUsers, deleteUsers, verifyUser};

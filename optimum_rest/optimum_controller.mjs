@@ -48,6 +48,10 @@ app.get('/', (req, res) => {
     res.render('landing_page_index.ejs')
 })
 
+app.get('/login', (req, res) => {
+    res.render('login_index.ejs')
+})
+
 app.get('/signupform', (req, res) => {
     res.render('user_creation_index.ejs')
 })
@@ -63,6 +67,32 @@ app.post('/users', asyncHandler(async (req, res) => {
             // res.set('Content-Type', 'application/json');
             // res.status(201).json(user);
             res.redirect('/');
+            
+        } catch (error) {
+            // request error (from A7)
+            console.error(error);
+            res.status(400).json({ Error: 'Request Failed' });
+        }
+    // } else {
+    //     // Body invalid if isBodyValid() returns False
+    //     res.set('Content-Type', 'application/json');
+    //     res.status(400).json({ Error: 'Invalid request' });
+    // }
+    
+        
+    
+    // res.status(501).send({ Error: "Not implemented yet || app.post('/exercises'" });
+}));
+
+app.post('/login', asyncHandler(async (req, res) => {
+    // if (isBodyValid(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password)){
+        try {
+            const username = req.body.login_username;
+
+            // res.set('Content-Type', 'application/json');
+            // res.status(201).json(user);
+            users.verifyUser(username)
+            
             
         } catch (error) {
             // request error (from A7)
