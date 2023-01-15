@@ -134,29 +134,41 @@ app.get('/users/:_id', asyncHandler(async (req, res) => {
 }));
 
 app.post('/login', asyncHandler(async (req, res) => {
-    // if (isBodyValid(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password)){
-        try {
-            const username = req.body.login_username;
+    try {
+        const username = req.body.login_username;
 
-            // res.set('Content-Type', 'application/json');
-            // res.status(201).json(user);
-            users.verifyUser(username)
+        // res.set('Content-Type', 'application/json');
+        // res.status(201).json(user);
+        // users.verifyUser(username)
+
+
+        const filter = req.body;
+        const result = await users.findUsers(filter);
+        console.log(result)
+        if (result[0] != null) {
+            res.set('Content-Type', 'application/json');
+            res.status(200).json(result);
             
-            
-        } catch (error) {
-            // request error (from A7)
-            console.error(error);
-            res.status(400).json({ Error: 'Request Failed' });
+        } else {
+            res.set('Content-Type', 'application/json');
+            res.status(404).json({ Error: 'Not found' });
         }
-    // } else {
-    //     // Body invalid if isBodyValid() returns False
-    //     res.set('Content-Type', 'application/json');
-    //     res.status(400).json({ Error: 'Invalid request' });
-    // }
-    
+        //=====
+        // result[0] != null -- checks for undefined as well... might cause issue later??
+        // if (result[0] != null) {
+        //     res.set('Content-Type', 'application/json');
+        //     res.status(200).json(result[0]);
+        // } else {
+        //     res.set('Content-Type', 'application/json');
+        //     res.status(404).json({ Error: 'Not found' });
+        // }
         
-    
-    // res.status(501).send({ Error: "Not implemented yet || app.post('/exercises'" });
+        
+    } catch (error) {
+        // request error (from A7)
+        console.error(error);
+        res.status(400).json({ Error: 'Request Failed' });
+    }
 }));
 
 app.listen(PORT, () => {

@@ -87,8 +87,20 @@ const createUser = async (name, weight, height, login_username, login_password) 
 }
 
 //Verify username exists
-const verifyUser = async (login_username) => {
-    User.exists({name: login_username}, function (err, doc) {
+// const verifyUser = async (login_username) => {
+//     User.exists({name: login_username}, function (err, doc) {
+//         if (err){
+//             return 'Error: ', err
+//         }else{
+            
+//             return 'Result: ',doc
+//         }
+//     });
+// }
+
+//Verify username exists NEW
+const verifyUser = async (filter) => {
+    User.exists(filter, function (err, doc) {
         if (err){
             return 'Error: ', err
         }else{
