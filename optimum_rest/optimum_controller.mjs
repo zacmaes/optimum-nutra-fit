@@ -57,22 +57,23 @@ app.get('/signupform', (req, res) => {
  * Create a new exercise with the name, reps, weight, unit, and date provided in the body
  */
 app.post('/users', asyncHandler(async (req, res) => {
-    if (isBodyValid(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password)){
+    // if (isBodyValid(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password)){
         try {
             const user = await users.createUser(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password);
-            res.set('Content-Type', 'application/json');
-            res.status(201).json(user);
+            // res.set('Content-Type', 'application/json');
+            // res.status(201).json(user);
+            res.redirect('/');
             
         } catch (error) {
             // request error (from A7)
             console.error(error);
             res.status(400).json({ Error: 'Request Failed' });
         }
-    } else {
-        // Body invalid if isBodyValid() returns False
-        res.set('Content-Type', 'application/json');
-        res.status(400).json({ Error: 'Invalid request' });
-    }
+    // } else {
+    //     // Body invalid if isBodyValid() returns False
+    //     res.set('Content-Type', 'application/json');
+    //     res.status(400).json({ Error: 'Invalid request' });
+    // }
     
         
     
