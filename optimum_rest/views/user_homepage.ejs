@@ -8,10 +8,27 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/home_page_main.js">
+<link rel="stylesheet" href="user_homepage_style.css">
 
 </head>
 <body>
+  <style>
+    table {
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+ 
+    th {
+        background-color: #f2f2f2;
+    }
+
+  </style>
 
 <!-- Navbar -->
 
@@ -20,10 +37,10 @@
       <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Home</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Food</a>
+        <a href="/home" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Home</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Add Food</a>
         <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Exercise</a> 
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Logout</a>
+        <a href="/" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Logout</a>
       </div>
     </div>
   </nav>
@@ -44,6 +61,41 @@
       </div>
 
     </div>
+    <table>
+      <thead>
+          <tr>
+              <th>Type</th>
+              <th>Name</th>
+              <th>Calories</th>
+              <th>Total Fat</th>
+              <th>Saturated Fat</th>
+              <th>Trans Fat</th>
+              <th>Total Carbohydrates</th>
+              <th>Dietary Fiber</th>
+              <th>Sugars</th>
+              <th>Protein</th>
+              <th>Cholesterol</th>
+              <th>Sodium</th>
+          </tr>
+      </thead>
+      <tbody id="nutrition-data">
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        </tr>
+      </tbody>
+  </table>
 
   </main>
 
@@ -56,6 +108,62 @@
   </footer>
 
   <!-- END MAIN -->
+  <script>
+    const nutritionData = [{
+  type: "Breakfast",
+  name: "Oatmeal with Berries",
+  nutrition_facts: {
+      calories: 300,
+      total_fat: 6,
+      saturated_fat: 1,
+      trans_fat: 0,
+      total_carbohydrates: 50,
+      dietary_fiber: 8,
+      sugars: 20,
+      protein: 10,
+      cholesterol: 20,
+      sodium: 150
+  }
+},
+{
+  type: "Lunch",
+  name: "Chicken Caesar Salad",
+  nutrition_facts: {
+      calories: 400,
+      total_fat: 25,
+      saturated_fat: 5,
+      trans_fat: 0,
+      total_carbohydrates: 20,
+      dietary_fiber: 3,
+      sugars: 5,
+      protein: 30,
+      cholesterol: 80,
+      sodium: 250
+  }
+}
+];
+
+const nutritionTable = document.querySelector("#nutrition-data");
+
+nutritionData.forEach(data => {
+  const row = document.createElement("tr");
+  row.innerHTML = `
+      <td>${data.type}</td>
+      <td>${data.name}</td>
+      <td>${data.nutrition_facts.calories}</td>
+      <td>${data.nutrition_facts.total_fat}</td>
+      <td>${data.nutrition_facts.saturated_fat}</td>
+      <td>${data.nutrition_facts.trans_fat}</td>
+      <td>${data.nutrition_facts.total_carbohydrates}</td>
+      <td>${data.nutrition_facts.dietary_fiber}</td>
+      <td>${data.nutrition_facts.sugars}</td>
+      <td>${data.nutrition_facts.protein}</td>
+      <td>${data.nutrition_facts.cholesterol}</td>
+      <td>${data.nutrition_facts.sodium}</td>
+  `;
+  nutritionTable.appendChild(row);
+});
+  </script>
 
 
   <script src='../public/js/user_homepage_main.js'></script>
