@@ -92,6 +92,47 @@ app.post('/users', asyncHandler(async (req, res) => {
     // res.status(501).send({ Error: "Not implemented yet || app.post('/exercises'" });
 }));
 
+
+
+/**
+ * Retrieve All users. 
+ */
+app.get('/users', asyncHandler(async (req, res) => {
+    try {
+        const filter = {};
+        const result = await users.findUsers(filter);
+        res.set('Content-Type', 'application/json');
+        res.status(200).json(result);
+        
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ Error: 'Request failed' });
+    }
+    // res.status(501).send({ Error: "Not implemented yet || app.get('/exercises'" });
+}));
+
+/**
+ * Retrive one exercise corresponding to the ID provided in the URL.
+ */
+app.get('/users/:_id', asyncHandler(async (req, res) => {
+    try {
+        const filter = { _id: req.params._id };
+        const result = await users.findUsers(filter);
+        // result[0] != null -- checks for undefined as well... might cause issue later??
+        if (result[0] != null) {
+            res.set('Content-Type', 'application/json');
+            res.status(200).json(result[0]);
+        } else {
+            res.set('Content-Type', 'application/json');
+            res.status(404).json({ Error: 'Not found' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ Error: 'Request failed' });
+    }
+    // res.status(501).send({ Error: "Not implemented yet || app.get('/exercises/:_id'" });
+}));
+
 app.post('/login', asyncHandler(async (req, res) => {
     // if (isBodyValid(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password)){
         try {
@@ -117,7 +158,6 @@ app.post('/login', asyncHandler(async (req, res) => {
     
     // res.status(501).send({ Error: "Not implemented yet || app.post('/exercises'" });
 }));
-
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
