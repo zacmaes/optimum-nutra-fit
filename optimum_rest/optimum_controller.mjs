@@ -46,15 +46,23 @@ const isBodyValid = (name, weight, height, login_username, login_password) => {
 // home page
 app.get('/', (req, res) => {
     res.render('landing_page_index.ejs')
-})
+});
 
 app.get('/login', (req, res) => {
     res.render('login_index.ejs')
-})
+});
 
 app.get('/signupform', (req, res) => {
     res.render('user_creation_index.ejs')
-})
+});
+
+app.get('/edituser', (req, res) => {
+    res.render('user_edit_form_index.ejs')
+});
+
+app.get('/home', (req, res) => {
+    res.render('user_homepage.ejs')
+});
 
 // --------------Mongo routes-------------------------------
 /**
