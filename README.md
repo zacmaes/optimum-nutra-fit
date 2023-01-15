@@ -2,8 +2,8 @@
 ## BeaverHacks Winter 2023 Hackathon
 
 ## Creators
-Zachary Maes
-Joshua Palces
+- Zachary Maes
+- Joshua Palces
 
 ## Running the Application
 1. Fork the repository and clone it to your local machine.
