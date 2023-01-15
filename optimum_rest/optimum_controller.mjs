@@ -74,7 +74,7 @@ app.post('/users', asyncHandler(async (req, res) => {
             const user = await users.createUser(req.body.name, req.body.weight, req.body.height, req.body.login_username, req.body.login_password);
             // res.set('Content-Type', 'application/json');
             // res.status(201).json(user);
-            res.redirect('/');
+            res.redirect('/home');
             
         } catch (error) {
             // request error (from A7)
